@@ -74,7 +74,6 @@ class ControllerStudent {
         },
       });
       let hashedPassword = hash(password);
-      console.log(hashedPassword);
       if (!findStudent) throw { status: 404, msg: "Student not found" };
       await Student.update(
         {

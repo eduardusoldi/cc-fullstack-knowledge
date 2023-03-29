@@ -15,9 +15,42 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Course.init({
-    name: DataTypes.STRING,
-    code: DataTypes.STRING,
-    credit: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Please insert course's name`
+        },
+        notEmpty: {
+          msg: `Please insert course's name`
+        }
+      }
+    },
+    code: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Please insert course's code`
+        },
+        notEmpty: {
+          msg: `Please insert course's code`
+        }
+      }
+    },
+    credit: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Please insert course's credit`
+        },
+        notEmpty: {
+          msg: `Please insert course's credit`
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Course',
