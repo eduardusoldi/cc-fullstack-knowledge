@@ -40,6 +40,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           msg: `Please insert student's e-mail`
+        },
+        isEmail: {
+          msg: "Please insert e-mail format"
         }
       }
     },
@@ -52,6 +55,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           msg: `Please insert student's password`
+        },
+        len: {
+          args: [5,100],
+          msg: `Minimal length for student's password is 5 character`
         }
       }
     },
