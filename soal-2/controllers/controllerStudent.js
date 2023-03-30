@@ -10,10 +10,23 @@ class ControllerStudent {
   static async fetchStudent(req, res, next) {
     try {
       let studentData = await Student.findAll({
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        },
         include: [
           {
             model: StudentCourse,
-            include: Course,
+            attributes: {
+              exclude: ['id', 'createdAt', 'updatedAt', 'StudentId',]
+            },
+            include: [
+              {
+                model: Course,
+                attributes: {
+                  exclude: ['createdAt', 'updatedAt']
+                },
+              }
+            ]
           },
         ],
       });
@@ -107,6 +120,34 @@ class ControllerStudent {
       });
     } catch (error) {
       next(error);
+    }
+  }
+
+  static async fetchStudentCourse(req, res, next) {
+    try {
+      let studentCourseData = await StudentCourse.findAll(
+        {
+        include: [Student, Course]
+      }
+      )
+      res.status(200).json(studentCourseData)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  static async createStudentCourse(req, res, next) {
+    try {
+      let studentData = await Student.findOne({where: {id: req.params.studentId}})
+      if (!studentData) throw ({status: 404, msg: 'Student not found'})
+      let studentCourseData = await StudentCourse.create({
+        CourseId: 2, 
+        StudentId: req.params.studentId
+      })
+      res.status(201).json(studentCourseData)
+    } catch (error) {
+      console.log(error)
+      next(error)
     }
   }
 }
