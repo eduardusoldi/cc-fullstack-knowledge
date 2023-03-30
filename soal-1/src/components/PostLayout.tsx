@@ -1,9 +1,12 @@
-import React from 'react'
-
+import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
 function PostLayout() {
   return (
-    <div>PostLayout</div>
-  )
+    <>
+      <Navbar />
+      <Outlet />
+    </>
+  );
 }
 
-export default PostLayout
+export default PostLayout;
