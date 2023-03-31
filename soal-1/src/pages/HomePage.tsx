@@ -6,7 +6,7 @@ function HomePage() {
   return (
     <>
       <div className="flex justify-center">
-        <div className="container mt-11">
+        <div className="container mx-[200px] mt-11">
           {/* Popular Tags */}
           <span className="text-3xl font-bold">Popular Tags</span>
           <div className="flex w-max gap-4 mt-10">
@@ -78,30 +78,30 @@ function HomePage() {
                     onClick={() => setActiveStatus(1)}
                     className={
                       activeStatus == 1
-                        ? "text-sm text-indigo-700 flex flex-col justify-between border-indigo-700 pt-3 rounded-t mr-10 font-normal"
+                        ? "text-sm text-blue-500 flex flex-col justify-between border-blue-500 pt-3 rounded-t mr-10 font-normal"
                         : "text-sm text-gray-600 py-3 mr-10 font-normal cursor-pointer hover:text-gray-800"
                     }
                   >
                     <span className="mb-3 cursor-pointer">
-                      {activeStatus == 1 ? "Global Feed" : "Global Feed"}
+                      {activeStatus == 1 ? "Your Feed" : "Your Feed"}
                     </span>
                     {activeStatus == 1 && (
-                      <div className="w-full h-1 bg-indigo-700 rounded-t-md" />
+                      <div className="w-full h-1 bg-blue-700 rounded-t-md" />
                     )}
                   </li>
                   <li
                     onClick={() => setActiveStatus(2)}
                     className={
                       activeStatus == 2
-                        ? "text-sm text-indigo-700 flex flex-col justify-between border-indigo-700 pt-3 rounded-t mr-10 font-normal"
+                        ? "text-sm text-blue-500 flex flex-col justify-between border-blue-500 pt-3 rounded-t mr-10 font-normal"
                         : "text-sm text-gray-600 py-3 mr-10 font-normal cursor-pointer hover:text-gray-800"
                     }
                   >
                     <span className="mb-3 cursor-pointer">
-                      {activeStatus == 2 ? "Your Feed" : "Your Feed"}
+                      {activeStatus == 2 ? "Global Feed" : "Global Feed"}
                     </span>
                     {activeStatus == 2 && (
-                      <div className="w-full h-1 bg-indigo-700 rounded-t-md" />
+                      <div className="w-full h-1 bg-blue-500 rounded-t-md" />
                     )}
                   </li>
                 </ul>
