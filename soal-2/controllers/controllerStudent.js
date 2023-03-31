@@ -146,7 +146,6 @@ class ControllerStudent {
       })
       res.status(201).json(studentCourseData)
     } catch (error) {
-      console.log(error)
       next(error)
     }
   }
