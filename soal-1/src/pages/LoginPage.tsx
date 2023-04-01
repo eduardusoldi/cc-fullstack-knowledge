@@ -29,7 +29,7 @@ export default function Variants() {
                 <div>Password</div>
                 <Input type="password" size="lg" label="Your password" />
               </div>
-              <Button className="mt-6" fullWidth>
+              <Button className="mt-6 bg-gradient-to-r from-cyan-500 to-blue-500" fullWidth>
                 Login
               </Button>
               <Typography color="gray" className="mt-4 text-end font-normal">
