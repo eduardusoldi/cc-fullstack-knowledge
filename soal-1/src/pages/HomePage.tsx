@@ -1,6 +1,6 @@
 import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
-import Card from "../components/Card";
+import CardArticle from "../components/CardArticle";
 import noarticle from "../assets/noarticle.jpg";
 import { Link } from "react-router-dom";
 function HomePage() {
@@ -150,12 +150,12 @@ function HomePage() {
                   : "hidden"
               }
             >
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
+              <CardArticle />
+              <CardArticle />
+              <CardArticle />
+              <CardArticle />
+              <CardArticle />
+              <CardArticle />
             </div>
           </div>
         </div>
