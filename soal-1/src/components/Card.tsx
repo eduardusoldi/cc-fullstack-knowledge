@@ -38,14 +38,12 @@ export default function Example() {
       </CardHeader>
       <CardBody className="mb-1 p-0">
         <Typography className="font-semibold text-black mb-3">
-          &quot;I found solution to all my design needs from Creative Tim. I use
+          I found solution to all my design needs from Creative Tim. I use
           them as a freelancer in my hobby projects for fun! And its really
-          affordable, very humble guys !!!&quot;
+          affordable, very humble guys !!!
         </Typography>
         <Typography>
-          I found solution to all my design needs from Creative Tim. I use them
-          as a freelancer in my hobby projects for fun! And its really
-          affordable, very humble guys !!!
+          I found solution to all my design needs from Creative Tim...
         </Typography>
         <Typography className="text-blue-500 font-semibold mt-3 border-b-2 pb-3">
           Read more...
@@ -62,8 +60,7 @@ export default function Example() {
           </Button>
           <div className="ml-11">
             <Button
-              className="rounded-xl flex items-center text-base justify-center w-[90px] h-[40px]"
-              color="blue"
+              className="from-cyan-500 to-blue-500 rounded-xl flex items-center text-base justify-center w-[85px] h-[40px]"
               variant="outlined"
             >
               <svg
@@ -73,8 +70,8 @@ export default function Example() {
                 className="w-6 h-6"
               >
                 <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-              </svg>
-              42
+              </svg> 
+               42
             </Button>
           </div>
         </div>

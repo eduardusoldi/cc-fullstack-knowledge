@@ -1,8 +1,13 @@
 import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
 import Card from "../components/Card";
+import noarticle from "../assets/noarticle.jpg";
+import { Link } from "react-router-dom";
 function HomePage() {
   const [activeStatus, setActiveStatus] = useState(1);
+  let actionTab = (number: number) => {
+    setActiveStatus(number);
+  };
   return (
     <>
       <div className="flex justify-center">
@@ -75,7 +80,7 @@ function HomePage() {
               <div className="xl:w-full xl:mx-0 pl-5 pr-5 h-12">
                 <ul className="flex">
                   <li
-                    onClick={() => setActiveStatus(1)}
+                    onClick={() => actionTab(1)}
                     className={
                       activeStatus == 1
                         ? "text-sm text-blue-500 flex flex-col justify-between border-blue-500 pt-3 rounded-t mr-10 font-normal"
@@ -90,7 +95,7 @@ function HomePage() {
                     )}
                   </li>
                   <li
-                    onClick={() => setActiveStatus(2)}
+                    onClick={() => actionTab(2)}
                     className={
                       activeStatus == 2
                         ? "text-sm text-blue-500 flex flex-col justify-between border-blue-500 pt-3 rounded-t mr-10 font-normal"
@@ -108,34 +113,50 @@ function HomePage() {
               </div>
             </div>
             <div className="flex justify-end mr-3 mb-5">
-              <Button
-                className="flex gap-4 rounded-full w-[180px] h-[40px] items-center"
-                color="blue"
-                variant="outlined"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
+              <Link to={"/new-article"}>
+                <Button
+                  className="gradient-to-r from-cyan-500 to-blue-500 flex gap-4 rounded-full w-[180px] h-[40px] items-center"
+                  variant="outlined"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                  />
-                </svg>
-                Write Article
-              </Button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                    />
+                  </svg>
+                  Write Article
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="grid grid-flow-col grid-rows-2 gap-4 justify-center">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            <div className={activeStatus == 1 ? "" : "hidden"}>
+              {/* Your Feed */}
+              <img className="mt-11 w-[600px]" src={noarticle} />
+            </div>
+            {/* Global Feed */}
+            <div
+              className={
+                activeStatus == 2
+                  ? "grid grid-cols-2 gap-4 justify-center"
+                  : "hidden"
+              }
+            >
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import logoipsum from '../assets/logoipsum.jpg'
+import logoipsum from "../assets/logoipsum.jpg";
 import {
   Navbar,
   MobileNav,
@@ -26,6 +26,7 @@ import {
   RocketLaunchIcon,
   Bars2Icon,
 } from "@heroicons/react/24/outline";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 // profile menu component
 const profileMenuItems = [
@@ -46,6 +47,12 @@ const profileMenuItems = [
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+  let navigate = useNavigate()
+  let profileMenu = (label: string) => {
+    let newLabel = label.toLowerCase().replaceAll(' ', '')
+    closeMenu()
+    navigate(`/${newLabel}`)
+  }
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -77,7 +84,7 @@ function ProfileMenu() {
           return (
             <MenuItem
               key={label}
-              onClick={closeMenu}
+              onClick={()=>profileMenu(label)}
               className={`flex items-center gap-2 rounded ${
                 isLastItem
                   ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
@@ -93,7 +100,7 @@ function ProfileMenu() {
                 variant="small"
                 className="font-normal"
                 color={isLastItem ? "red" : "inherit"}
-              >
+                >
                 {label}
               </Typography>
             </MenuItem>
@@ -109,17 +116,17 @@ const navListMenuItems = [
   {
     title: "@material-tailwind/html",
     description:
-    "Learn how to use @material-tailwind/html, packed with rich components and widgets.",
+      "Learn how to use @material-tailwind/html, packed with rich components and widgets.",
   },
   {
     title: "@material-tailwind/react",
     description:
-    "Learn how to use @material-tailwind/react, packed with rich components for React.",
+      "Learn how to use @material-tailwind/react, packed with rich components for React.",
   },
   {
     title: "Material Tailwind PRO",
     description:
-    "A complete set of UI Elements for building faster websites in less time.",
+      "A complete set of UI Elements for building faster websites in less time.",
   },
 ];
 
@@ -141,7 +148,7 @@ function NavList() {
           variant="small"
           color="blue-gray"
           className="font-normal"
-          >
+        >
           <MenuItem className="flex items-center justify-end gap-2 lg:rounded-full">
             {label}
           </MenuItem>
@@ -167,16 +174,16 @@ export default function ComplexNavbar() {
       <div className="relative mx-auto flex items-center text-blue-gray-900">
         <Typography
           as="a"
-          href="#"
           className="mr-4 ml-[200px] cursor-pointer py-1.5 font-medium"
-          >
-          <img
-            className="w-[150px]"
-            src={logoipsum}
-            />
+        >
+          <Link to={"/home"}>
+            <img className="w-[150px]" src={logoipsum} />
+          </Link>
         </Typography>
         <div className="absolute top-2/4 left-2/4 hidden -translate-x-2/4 -translate-y-2/4 lg:block ml-[280px]">
-          <NavList />
+          <Link to={"/home"}>
+            <NavList />
+          </Link>
         </div>
         <ProfileMenu />
       </div>
