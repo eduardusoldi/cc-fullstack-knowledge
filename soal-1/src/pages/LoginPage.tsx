@@ -8,8 +8,53 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { json, Link, useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { Toast } from "../helpers/toast";
+import axios from 'axios';
 
-export default function Variants() {
+export default function LoginPage() {
+  const { register, handleSubmit } = useForm();
+  let { isLoading, dataAdmin } = useSelector((state: any) => state.auth);
+  let navigate = useNavigate()
+  let baseURL = 'https://test.fourtrezz.info/fs'
+
+  const postLogin = async (user: Object) => {
+    try {
+        let response = await axios({
+          method: 'POST',
+          url: `${baseURL}/users`,
+          data: {user},
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          }
+        })
+        await Toast.fire({
+          icon: 'success',
+          title: "Success!",
+          text: `Welcome to the club, ${response}`
+        })
+      // localStorage.setItem('access_token', response.token)
+      navigate('/home')
+      await Toast.fire({
+        icon: 'success',
+        title: "Success!",
+        text: `Welcome back!`
+      })
+    } catch (error: any) {
+      let errorMsg = error.response.data.errors.body
+      await Toast.fire({
+        icon: 'error',
+        title: 'Oops!',
+        html: `<div>${errorMsg}</div>`
+      })
+    }
+  };
+
   return (
     <div className="flex justify-center">
       <div className=" flex justify-between container ml-[200px]">
@@ -22,24 +67,26 @@ export default function Variants() {
             <Typography variant="h4" color="blue-gray">
               LOGIN
             </Typography>
-            <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+            <form
+            onSubmit={handleSubmit(postLogin)}
+            className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
               <div className="mb-4 flex flex-col gap-6">
                 <div>Email</div>
                 <Input size="lg" label="Your email" />
                 <div>Password</div>
                 <Input type="password" size="lg" label="Your password" />
               </div>
-              <Button className="mt-6 bg-gradient-to-r from-cyan-500 to-blue-500" fullWidth>
+              <Button className="mt-6 bg-gradient-to-r from-cyan-500 to-blue-500" type='submit' fullWidth>
                 Login
               </Button>
               <Typography color="gray" className="mt-4 text-end font-normal">
                 No have account?{" "}
-                <a
-                  href="#"
+                <Link
+                  to={'/register'}
                   className="font-medium text-blue-500 transition-colors hover:text-blue-700"
                 >
                   Sign up here
-                </a>
+                </Link>
               </Typography>
             </form>
           </Card>
@@ -51,7 +98,7 @@ export default function Variants() {
                 className="w-[80px] mb-9 mt-[200px]"
                 src={quote}
               />
-              <Typography variant="" color="blue-gray">
+              <Typography color="blue-gray">
                 <div className="text-xl mb-7">
                   Discover new experience with sharing anything your knowledge
                   and achieve your goals with strong mind with us!

@@ -9,6 +9,7 @@ import {
 import { StarIcon } from "@heroicons/react/24/solid";
 
 export default function Example() {
+  
   return (
     <Card
       color="transparent"
@@ -30,7 +31,7 @@ export default function Example() {
         <div className="flex w-full flex-col gap-0.5">
           <div className="flex items-center justify-between">
             <Typography variant="h5" color="blue">
-              Name of User
+             Mas Paijo
             </Typography>
           </div>
           <Typography color="blue-gray">October 9, 2022</Typography>

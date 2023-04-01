@@ -176,7 +176,7 @@ export default function ComplexNavbar() {
           as="a"
           className="mr-4 ml-[200px] cursor-pointer py-1.5 font-medium"
         >
-          <Link to={"/home"}>
+          <Link to={"/"}>
             <img className="w-[150px]" src={logoipsum} />
           </Link>
         </Typography>

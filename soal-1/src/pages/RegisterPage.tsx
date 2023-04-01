@@ -1,6 +1,10 @@
-import React from "react";
-import download from "../assets/download.png";
-import quote from "../assets/quote.jpg";
+
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { json, Link, useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { Toast } from "../helpers/toast";   
 import logoipsum from "../assets/logoipsum.jpg";
 import {
   Card,
@@ -9,8 +13,38 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import axios from 'axios'
 
 function RegisterPage() {
+  const { register, handleSubmit } = useForm();
+  let navigate = useNavigate()
+  let baseURL = 'https://test.fourtrezz.info/fs'
+  const postRegister = async (user: Object) => {
+    try {
+      let response = await axios({
+        method: 'POST',
+        url: `${baseURL}/users`,
+        data: user,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        }
+      })
+      await Toast.fire({
+        icon: 'success',
+        title: "Success!",
+        text: `Welcome to the club, ${response}`
+      })
+    } catch (error: any) {
+      let errorMsg = error.response.data.errors.body
+      await Toast.fire({
+        icon: 'error',
+        title: 'Oops!',
+        html: `<div>${errorMsg}</div>`
+      })
+    }
+  };
+
   return (
     <>
       <div className="flex mt-[200px] justify-center">
@@ -23,24 +57,28 @@ function RegisterPage() {
               <Typography variant="h4" color="blue-gray" className="text-center">
                REGISTER
               </Typography>
-              <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+              <form
+              onSubmit={handleSubmit(postRegister)}
+              className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                 <div className="mb-4 flex flex-col gap-6">
+                  <div>Username</div>
+                  <Input size="lg" label="Your username" {...register("Username")}/>
                   <div>Email</div>
-                  <Input size="lg" label="Your email" />
+                  <Input size="lg" label="Your email" {...register("Email")}/>
                   <div>Password</div>
-                  <Input type="password" size="lg" label="Your password" />
+                  <Input type="password" size="lg" label="Your password" {...register("Password")}/>
                 </div>
-                <Button className="mt-6 bg-gradient-to-r from-cyan-500 to-blue-500" fullWidth>
+                <Button type="submit" className="mt-6 bg-gradient-to-r from-cyan-500 to-blue-500" fullWidth>
                   Register
                 </Button>
                 <Typography color="gray" className="mt-4 text-center font-normal">
                   Have an account?{" "}
-                  <a
-                    href="#"
+                  <Link
+                    to={'/login'}
                     className="font-medium text-blue-500 transition-colors hover:text-blue-700"
                   >
                     Sign in here
-                  </a>
+                  </Link>
                 </Typography>
               </form>
             </Card>

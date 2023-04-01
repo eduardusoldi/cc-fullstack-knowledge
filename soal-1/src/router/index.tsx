@@ -5,6 +5,7 @@ import LandingPage from "../pages/LandingPage";
 import LoginPage from "../pages/LoginPage";
 import MyProfile from "../pages/MyProfile";
 import RegisterPage from "../pages/RegisterPage";
+import Setting from "../pages/Setting";
 import WriteArticle from "../pages/WriteArticle";
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/new-article",
         element: <WriteArticle />,
+      },
+      {
+        path: "/settings",
+        element: <Setting />,
       },
       {
         path: "/myprofile",
