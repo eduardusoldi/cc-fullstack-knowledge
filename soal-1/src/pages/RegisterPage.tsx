@@ -21,19 +21,25 @@ function RegisterPage() {
   let baseURL = 'https://test.fourtrezz.info/fs'
   const postRegister = async (user: Object) => {
     try {
-      let response = await axios({
+      let { data } = await axios({
         method: 'POST',
         url: `${baseURL}/users`,
-        data: user,
+        data: {user},
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json"
         }
       })
+      localStorage.setItem('token', data.user.token)
+      localStorage.setItem('username', data.user.username)
+      localStorage.setItem('bio', data.user.bio)
+      localStorage.setItem('image', data.user.image)
+      localStorage.setItem('email', data.user.email)
+      navigate('/home')
       await Toast.fire({
         icon: 'success',
         title: "Success!",
-        text: `Welcome to the club, ${response}`
+        text: `Welcome to the club!`
       })
     } catch (error: any) {
       let errorMsg = error.response.data.errors.body

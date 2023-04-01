@@ -20,20 +20,23 @@ function SettingPage() {
   let baseURL = "https://test.fourtrezz.info/fs";
   const postArticle = async (user: Object) => {
     try {
-      let response = await axios({
+      console.log(user)
+      let {data} = await axios({
         method: "get",
         url: `${baseURL}/user`,
         data: user,
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          "Accept": "application/json",
+          "Authorization": `Token ${localStorage.token}`
         },
       });
       await Toast.fire({
         icon: "success",
         title: "Success!",
-        text: `Welcome to the club, ${response}`,
+        text: `Successfully updated your profile!`,
       });
+      navigate('/home')
     } catch (error: any) {
       let errorMsg = error.response.data;
       await Toast.fire({
@@ -59,11 +62,14 @@ function SettingPage() {
               </Typography>
               <form onSubmit={handleSubmit(postArticle)}>
                 <div className="w-[500px] mt-11">
-                  <Input label="Your profile picture.." className="rounded-full h-[70px]" {...register("image")}/>
+                  <Input
+                  value={localStorage.image}
+                  label="Your profile picture.." className="rounded-full h-[70px]" {...register("image")}/>
                 </div>
                 <div className="w-[500px] mt-[60px]">
                   <Input
                     label="Your name.."
+                    value={localStorage.username}
                     className="rounded-full h-[70px]"
                     {...register("name")}
                   />
@@ -71,12 +77,15 @@ function SettingPage() {
                 <div className="w-[500px] mt-[60px]">
                   <Input
                     label="Your bio.."
+                    value={localStorage.bio}
                     className="rounded-xl h-[200px]"
                     {...register("bio")}
                   />
                 </div>
                 <div className="w-[500px] mt-[180px]">
-                  <Input label="Your email.." className="rounded-full h-[70px]"
+                  <Input
+                  value={localStorage.email}
+                  label="Your email.." className="rounded-full h-[70px]"
                   {...register("email")}/>
                 </div>
                 <div className="w-[500px] mt-[60px]">

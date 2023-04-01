@@ -30,7 +30,8 @@ function HomePage() {
       image: string;
       following: boolean;
     },
-    favoritesCount: number
+    favoritesCount: number,
+    createdAt: string
   }
   interface Article {
     articles: ArticleData[];
@@ -216,7 +217,7 @@ function HomePage() {
                           {article.author.username}
                         </Typography>
                       </div>
-                      <Typography color="blue-gray">October 9, 2022</Typography>
+                      <Typography color="blue-gray">{article.createdAt.split('T')[0]}</Typography>
                     </div>
                   </CardHeader>
                   <CardBody className="mb-1 p-0">
@@ -226,9 +227,11 @@ function HomePage() {
                     <Typography>
                       {article.body.slice(0, 200) + "..."}
                     </Typography>
+                    <Link to={`/article/${article.slug}`}>
                     <Typography className="text-blue-500 font-semibold mt-3 border-b-2 pb-3">
                       Read more...
                     </Typography>
+                    </Link>
                     <div className="flex w-max gap-4 mt-3 justify-between">
                       {article.tagList.map((el) => (
                         <Button

@@ -10,7 +10,6 @@ import {
 } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { json, Link, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { Toast } from "../helpers/toast";
@@ -18,27 +17,25 @@ import axios from 'axios';
 
 export default function LoginPage() {
   const { register, handleSubmit } = useForm();
-  let { isLoading, dataAdmin } = useSelector((state: any) => state.auth);
   let navigate = useNavigate()
   let baseURL = 'https://test.fourtrezz.info/fs'
 
   const postLogin = async (user: Object) => {
     try {
-        let response = await axios({
+        let {data } = await axios({
           method: 'POST',
-          url: `${baseURL}/users`,
+          url: `${baseURL}/users/login`,
           data: {user},
           headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
           }
         })
-        await Toast.fire({
-          icon: 'success',
-          title: "Success!",
-          text: `Welcome to the club, ${response}`
-        })
-      // localStorage.setItem('access_token', response.token)
+      localStorage.setItem('token', data.user.token)
+      localStorage.setItem('username', data.user.username)
+      localStorage.setItem('bio', data.user.bio)
+      localStorage.setItem('email', data.user.email)
+      localStorage.setItem('image', data.user.image)
       navigate('/home')
       await Toast.fire({
         icon: 'success',
@@ -72,9 +69,13 @@ export default function LoginPage() {
             className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
               <div className="mb-4 flex flex-col gap-6">
                 <div>Email</div>
-                <Input size="lg" label="Your email" />
+                <Input size="lg" label="Your email"
+                {...register('email')}
+                />
                 <div>Password</div>
-                <Input type="password" size="lg" label="Your password" />
+                <Input
+                {...register('password')}
+                type="password" size="lg" label="Your password" />
               </div>
               <Button className="mt-6 bg-gradient-to-r from-cyan-500 to-blue-500" type='submit' fullWidth>
                 Login

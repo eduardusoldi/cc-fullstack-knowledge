@@ -138,14 +138,16 @@ class ControllerStudent {
 
   static async createStudentCourse(req, res, next) {
     try {
-      let studentData = await Student.findOne({where: {id: req.params.studentId}})
+      let studentData = await Student.findOne({where: {id: +req.user.id}})
+      console.log(req.user.id, req.params.courseId)
       if (!studentData) throw ({status: 404, msg: 'Student not found'})
       let studentCourseData = await StudentCourse.create({
-        CourseId: 2, 
-        StudentId: req.params.studentId
+        StudentId: +req.user.id, 
+        CourseId: +req.params.courseId
       })
       res.status(201).json(studentCourseData)
     } catch (error) {
+      console.log(error)
       next(error)
     }
   }

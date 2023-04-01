@@ -8,6 +8,7 @@ function MyProfile() {
   let actionTab = (number: number) => {
     setActiveStatus(number);
   };
+
   return (
     <div>
       <div className="flex justify-center">
@@ -23,14 +24,24 @@ function MyProfile() {
                 <Avatar
                   size="xxl"
                   variant="circular"
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                  src={localStorage.image}
                   alt="candice wu"
                 />
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center gap-3">
                 <span className="text-3xl font-bold text-black mb-4">
-                  Mas Paijo
+                  {localStorage.username}
                 </span>
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z" />
+                  </svg>
+                </div>
               </div>
               <span className="flex justify-center text-sm text-center mx-[200px]">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -93,7 +104,9 @@ function MyProfile() {
                         }
                       >
                         <span className="mb-3 cursor-pointer">
-                          {activeStatus == 2 ? "Favorited Article" : "Favorited Article"}
+                          {activeStatus == 2
+                            ? "Favorited Article"
+                            : "Favorited Article"}
                         </span>
                         {activeStatus == 2 && (
                           <div className="w-full h-1 bg-blue-500 rounded-t-md" />
@@ -102,7 +115,6 @@ function MyProfile() {
                     </ul>
                   </div>
                 </div>
-
               </div>
               <div className="grid grid-flow-col grid-rows-2 gap-4 justify-center">
                 <div className={activeStatus == 2 ? "" : "hidden"}>
